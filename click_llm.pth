@@ -1,0 +1,1 @@
+import click_llm; click_llm._autopatch_if_enabled()

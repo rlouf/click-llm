@@ -73,7 +73,6 @@ root_command: acme
 commands: 4
 
 ### acme deploy release
-kind: command
 summary: Roll out a service release.
 usage: acme deploy release [OPTIONS] SERVICE
 params:
@@ -106,5 +105,5 @@ attach(cli)
 
 ## Notes
 
-Auto mode uses Python's `sitecustomize` startup hook plus a Click monkeypatch
+Auto mode uses a `.pth` startup hook plus a Click monkeypatch
 (`click.Group.get_command` and `click.Group.list_commands`).

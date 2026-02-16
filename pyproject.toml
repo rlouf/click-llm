@@ -18,7 +18,7 @@ dependencies = [
 
 [tool.setuptools]
 package-dir = {"" = "src"}
-py-modules = ["sitecustomize"]
+include-package-data = false
 
 [tool.setuptools.packages.find]
 where = ["src"]
