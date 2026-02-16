@@ -187,7 +187,11 @@ def render_catalog_text(catalog: dict[str, Any]) -> str:
         f"root_command: {catalog.get('root_command')}",
         "",
     ]
-    commands = list(catalog.get("commands", []))
+    commands = [
+        entry
+        for entry in list(catalog.get("commands", []))
+        if entry.get("kind") == "command"
+    ]
     lines.append(f"commands: {len(commands)}")
     for command in commands:
         path = str(command.get("path", "")).strip()
@@ -195,7 +199,6 @@ def render_catalog_text(catalog: dict[str, Any]) -> str:
             continue
         lines.append("")
         lines.append(f"### {path}")
-        lines.append(f"kind: {command.get('kind', 'command')}")
         summary = str(command.get("summary", "") or "").strip()
         if summary:
             lines.append(f"summary: {summary}")
@@ -224,6 +227,9 @@ def render_catalog_text(catalog: dict[str, Any]) -> str:
                 param.get("required", False),
                 _fmt(param.get("default")),
             )
+            choices = param.get("type", {}).get("choices")
+            if isinstance(choices, list) and choices:
+                line += f", choices={_fmt(choices)}"
             if param.get("is_flag", False):
                 line += ", is_flag=True"
             if param.get("multiple", False):

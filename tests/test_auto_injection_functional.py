@@ -105,6 +105,13 @@ def test_llm_json_command_is_available_without_importing_click_llm() -> None:
     assert "hello" in command_names
 
 
+def test_text_output_lists_commands_but_not_groups() -> None:
+    result = _run_cli("llm")
+    assert result.returncode == 0, result.stderr
+    assert "kind: group" not in result.stdout
+    assert result.stdout.count("\n### ") == 1
+
+
 def test_disable_env_var_turns_off_auto_injection() -> None:
     result = _run_cli("llm", disable_auto=True)
     assert result.returncode != 0
