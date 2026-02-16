@@ -1,0 +1,30 @@
+[build-system]
+requires = [
+  "setuptools>=69",
+  "setuptools-scm[toml]>=8",
+  "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "click-llm"
+dynamic = ["version"]
+description = "Inject an llm command into Click CLIs for command discovery"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "click>=8.1.7",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+py-modules = ["sitecustomize"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["click_llm*"]
+
+[tool.setuptools_scm]
+fallback_version = "0.1.0"
+version_scheme = "guess-next-dev"
+local_scheme = "no-local-version"

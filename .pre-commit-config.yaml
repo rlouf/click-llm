@@ -1,0 +1,18 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.10
+    hooks:
+      - id: ruff-check
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: ty-check
+        name: ty check
+        entry: ty check
+        language: python
+        additional_dependencies:
+          - ty==0.0.17
+          - click>=8.1.7
+        pass_filenames: false
+        files: \.pyi?$
